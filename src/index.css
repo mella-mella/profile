@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #07111F;
+    --bg-secondary: #0B1728;
+    --bg-card: #0F1D30;
+    --blue-primary: #2563EB;
+    --blue-secondary: #3B82F6;
+    --blue-light: #60A5FA;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: rgba(37, 99, 235, 0.35);
+    color: #F8FAFC;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue-secondary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(37, 99, 235, 0.4);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.6);
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-24 lg:py-32;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold tracking-[0.18em] uppercase text-blue-light mb-4;
+  }
+
+  .section-title {
+    @apply text-3xl lg:text-4xl font-bold text-text-primary leading-tight;
+  }
+
+  .card-base {
+    @apply bg-bg-card border border-white/[0.06] rounded-xl;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:border-blue-primary/25 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-primary/5;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-blue-primary text-white font-medium rounded-lg
+           transition-all duration-200 hover:bg-blue-secondary hover:-translate-y-px hover:shadow-lg hover:shadow-blue-primary/25
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-secondary;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-white/[0.12] text-text-secondary font-medium rounded-lg
+           transition-all duration-200 hover:border-blue-primary/40 hover:text-text-primary hover:bg-white/[0.03] hover:-translate-y-px
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-secondary;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-text-primary via-blue-light to-blue-secondary bg-clip-text text-transparent;
+  }
+
+  .tag {
+    @apply text-xs font-medium px-2.5 py-1 rounded-md bg-blue-primary/10 text-blue-light border border-blue-primary/20;
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      rgba(15, 29, 48, 0.8) 0%,
+      rgba(27, 51, 87, 0.6) 50%,
+      rgba(15, 29, 48, 0.8) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .border-subtle {
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .border-blue-subtle {
+    border-color: rgba(37, 99, 235, 0.2);
+  }
+}
+
+/* Timeline connector */
+.timeline-line {
+  background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.4), transparent);
+}
+
+/* Grid background */
+.bg-grid {
+  background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
