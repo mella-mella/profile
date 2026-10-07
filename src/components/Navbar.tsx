@@ -80,7 +80,7 @@ export default function Navbar() {
             <img 
               src="/melissa1.jpeg" 
               alt="Mella Melissa Logo" 
-              className="w-8 h-8 rounded-lg object-cover"
+              className="w-8 h-8 rounded-full object-cover"
             />
             <span className="font-semibold text-text-primary tracking-tight hidden sm:block">
               Mella Melissa
