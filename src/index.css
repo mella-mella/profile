@@ -26,6 +26,13 @@
     /* Borders */
     --border-subtle: rgba(232,199,154,0.13);
     --border-warm:   rgba(217,160,102,0.45);
+
+    /* Experimental Neon Accents — Acid Lime & Electric Cyan */
+    --accent-neon-lime:       #D9FF00;
+    --accent-neon-cyan:       #00E5FF;
+    --accent-neon-lime-glow:  rgba(217, 255, 0, 0.40);
+    --accent-neon-cyan-glow:  rgba(0, 229, 255, 0.40);
+    --accent-neon-gradient:   linear-gradient(135deg, #00E5FF 0%, #D9FF00 100%);
   }
 
   * {
@@ -54,9 +61,10 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent-primary);
+    outline: 2px solid var(--accent-neon-cyan);
     outline-offset: 2px;
     border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.35);
   }
 
   /* Scrollbar */
@@ -260,4 +268,63 @@ body::before {
   z-index: 0;
   overflow: visible;
 }
+
+/* ── Neon Streaks & Atmospheric Motion Keyframes ── */
+@keyframes neonStreakBreathe {
+  0%, 100% {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.40)) drop-shadow(0 0 22px rgba(217, 255, 0, 0.28));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.60)) drop-shadow(0 0 32px rgba(217, 255, 0, 0.42));
+  }
+}
+
+@keyframes neonTravel {
+  0% {
+    stroke-dashoffset: 600;
+  }
+  100% {
+    stroke-dashoffset: -600;
+  }
+}
+
+@keyframes neonParticleGlint {
+  0%, 100% {
+    transform: scale(0.9) translate(0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.2) translate(1px, -2px);
+    opacity: 1;
+  }
+}
+
+@keyframes neonRimGlow {
+  0%, 100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.55)) drop-shadow(0 0 14px rgba(217, 255, 0, 0.35));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.80)) drop-shadow(0 0 20px rgba(217, 255, 0, 0.55));
+  }
+}
+
+.neon-streak-animated {
+  animation: neonStreakBreathe 6.5s ease-in-out infinite;
+  will-change: opacity, filter;
+}
+
+.neon-rim-animated {
+  animation: neonRimGlow 5s ease-in-out infinite;
+  will-change: opacity, filter;
+}
+
+.neon-particle {
+  animation: neonParticleGlint 3.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 

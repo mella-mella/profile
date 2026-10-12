@@ -457,7 +457,175 @@ export default function Hero() {
                 <circle  cx="50"  cy="40"  r="1.2" fill="#D9A066" fillOpacity="0.24" />
               </svg>
 
-              {/* ── Circular profile image — sits on top of splash ── */}
+              {/* ── Precision Neon Light Streaks (behind portrait, zIndex: 2) ── */}
+              <div
+                className="absolute pointer-events-none neon-streak-animated"
+                style={{
+                  top: -180,
+                  left: -220,
+                  width: 780,
+                  height: 700,
+                  zIndex: 2,
+                  overflow: 'visible',
+                }}
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 780 700"
+                  className="w-full h-full overflow-visible"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    {/* Multi-tier bloom filters */}
+                    <filter id="streakBloomWide" x="-40%" y="-40%" width="180%" height="180%">
+                      <feGaussianBlur stdDeviation="18" result="wide" />
+                    </filter>
+                    <filter id="streakBloomMid" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="6" result="mid" />
+                    </filter>
+                    <filter id="streakBloomCore" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="1.5" result="core" />
+                    </filter>
+
+                    {/* Streak 1: Electric Cyan → Acid Lime linear gradient */}
+                    <linearGradient id="laserGrad1" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
+                      <stop offset="12%" stopColor="#00E5FF" stopOpacity="0.45" />
+                      <stop offset="38%" stopColor="#D9FF00" stopOpacity="0.95" />
+                      <stop offset="68%" stopColor="#00E5FF" stopOpacity="0.95" />
+                      <stop offset="86%" stopColor="#D9FF00" stopOpacity="0.80" />
+                      <stop offset="100%" stopColor="#D9FF00" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* Streak 2: Acid Lime dominant parallel gradient */}
+                    <linearGradient id="laserGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#D9FF00" stopOpacity="0" />
+                      <stop offset="18%" stopColor="#D9FF00" stopOpacity="0.75" />
+                      <stop offset="48%" stopColor="#00E5FF" stopOpacity="0.88" />
+                      <stop offset="78%" stopColor="#D9FF00" stopOpacity="0.85" />
+                      <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* Streak 3: Razor filament gradient */}
+                    <linearGradient id="laserGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
+                      <stop offset="25%" stopColor="#00E5FF" stopOpacity="0.65" />
+                      <stop offset="60%" stopColor="#D9FF00" stopOpacity="0.60" />
+                      <stop offset="100%" stopColor="#D9FF00" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* White-hot optical core line */}
+                    <linearGradient id="laserCoreGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
+                      <stop offset="15%" stopColor="#FFFFFF" stopOpacity="0.4" />
+                      <stop offset="35%" stopColor="#FFFFFF" stopOpacity="0.98" />
+                      <stop offset="70%" stopColor="#E6FFFF" stopOpacity="0.98" />
+                      <stop offset="88%" stopColor="#F7FFD1" stopOpacity="0.7" />
+                      <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* Volumetric fanning flare in top-right */}
+                    <linearGradient id="fanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
+                      <stop offset="40%" stopColor="#00E5FF" stopOpacity="0.16" />
+                      <stop offset="70%" stopColor="#D9FF00" stopOpacity="0.22" />
+                      <stop offset="100%" stopColor="#D9FF00" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* ── Volumetric optical flare fan (top-right exit) ── */}
+                  <polygon
+                    points="450,290 770,35 695,-10 495,200"
+                    fill="url(#fanGrad)"
+                    filter="url(#streakBloomWide)"
+                    opacity="0.8"
+                  />
+
+                  {/* ── STREAK 1: Primary Laser Core (Main Beam) ── */}
+                  {/* Layer 1: Atmospheric wide bloom */}
+                  <line
+                    x1="45" y1="621" x2="765" y2="49"
+                    stroke="url(#laserGrad1)"
+                    strokeWidth="34"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomWide)"
+                    opacity="0.32"
+                  />
+                  {/* Layer 2: Concentrated optical sheath */}
+                  <line
+                    x1="45" y1="621" x2="765" y2="49"
+                    stroke="url(#laserGrad1)"
+                    strokeWidth="9"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomMid)"
+                    opacity="0.75"
+                  />
+                  {/* Layer 3: Laser core */}
+                  <line
+                    x1="45" y1="621" x2="765" y2="49"
+                    stroke="url(#laserGrad1)"
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomCore)"
+                    opacity="0.95"
+                  />
+                  {/* Layer 4: Razor-thin incandescent white filament */}
+                  <line
+                    x1="45" y1="621" x2="765" y2="49"
+                    stroke="url(#laserCoreGrad)"
+                    strokeWidth="1.1"
+                    strokeLinecap="round"
+                    opacity="0.98"
+                  />
+
+                  {/* ── STREAK 2: Secondary Parallel Beam (offset +24px) ── */}
+                  {/* Atmospheric bloom */}
+                  <line
+                    x1="70" y1="595" x2="785" y2="28"
+                    stroke="url(#laserGrad2)"
+                    strokeWidth="18"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomWide)"
+                    opacity="0.25"
+                  />
+                  {/* Medium beam */}
+                  <line
+                    x1="70" y1="595" x2="785" y2="28"
+                    stroke="url(#laserGrad2)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomMid)"
+                    opacity="0.65"
+                  />
+                  {/* Thin core */}
+                  <line
+                    x1="70" y1="595" x2="785" y2="28"
+                    stroke="url(#laserGrad2)"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    opacity="0.88"
+                  />
+
+                  {/* ── STREAK 3: Tertiary Divergent Accent Filament (offset -28px) ── */}
+                  <line
+                    x1="28" y1="648" x2="735" y2="82"
+                    stroke="url(#laserGrad3)"
+                    strokeWidth="12"
+                    strokeLinecap="round"
+                    filter="url(#streakBloomWide)"
+                    opacity="0.18"
+                  />
+                  <line
+                    x1="28" y1="648" x2="735" y2="82"
+                    stroke="url(#laserGrad3)"
+                    strokeWidth="1.0"
+                    strokeLinecap="round"
+                    opacity="0.70"
+                  />
+                </svg>
+              </div>
+
+              {/* ── Circular profile image — sits on top of splash & streaks ── */}
               <div
                 style={{
                   position: 'relative',
@@ -466,8 +634,8 @@ export default function Hero() {
                   height: '100%',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  border: '2px solid rgba(232,199,154,0.14)',
-                  boxShadow: '0 24px 64px rgba(0,0,0,0.70), 0 0 0 1px rgba(217,160,102,0.08)',
+                  border: '2px solid rgba(232,199,154,0.18)',
+                  boxShadow: '0 24px 64px rgba(0,0,0,0.72), 0 0 0 1px rgba(217,160,102,0.10)',
                 }}
               >
                 <img
@@ -475,6 +643,195 @@ export default function Hero() {
                   alt="Mella Melissa"
                   className="w-full h-full object-cover"
                 />
+              </div>
+
+              {/* ── Partial Neon Rim & Prismatic Glints (zIndex: 12, directly on rim) ── */}
+              <div
+                className="absolute inset-0 pointer-events-none neon-rim-animated"
+                style={{ zIndex: 12 }}
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 340 340"
+                  className="w-full h-full overflow-visible"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <filter id="rimGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4.5" result="glow" />
+                      <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="3" />
+                    </filter>
+
+                    {/* Top-right rim gradient: Electric Cyan to Acid Lime */}
+                    <linearGradient id="rimGradTR" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
+                      <stop offset="25%" stopColor="#00E5FF" stopOpacity="0.95" />
+                      <stop offset="70%" stopColor="#D9FF00" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#D9FF00" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* Bottom-left rim gradient: Acid Lime to Electric Cyan */}
+                    <linearGradient id="rimGradBL" x1="100%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stopColor="#D9FF00" stopOpacity="0" />
+                      <stop offset="30%" stopColor="#D9FF00" stopOpacity="0.95" />
+                      <stop offset="75%" stopColor="#00E5FF" stopOpacity="0.95" />
+                      <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
+                    </linearGradient>
+
+                    {/* Starburst glint radial glows */}
+                    <radialGradient id="starHaloCyan" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.85" />
+                      <stop offset="50%" stopColor="#00E5FF" stopOpacity="0.30" />
+                      <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
+                    </radialGradient>
+                    <radialGradient id="starHaloLime" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#D9FF00" stopOpacity="0.85" />
+                      <stop offset="50%" stopColor="#D9FF00" stopOpacity="0.30" />
+                      <stop offset="100%" stopColor="#D9FF00" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
+
+                  {/* ── PARTIAL RIM ARC 1: Top-Right Circumference ── */}
+                  {/* Diffuse glow layer */}
+                  <path
+                    d="M 226,12 A 169 169 0 0 1 334,124"
+                    stroke="url(#rimGradTR)"
+                    strokeWidth="8"
+                    fill="none"
+                    strokeLinecap="round"
+                    filter="url(#rimGlowFilter)"
+                    opacity="0.65"
+                  />
+                  {/* Crisp neon rim line */}
+                  <path
+                    d="M 226,12 A 169 169 0 0 1 334,124"
+                    stroke="url(#rimGradTR)"
+                    strokeWidth="2.8"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  {/* Razor core highlight */}
+                  <path
+                    d="M 248,20 A 169 169 0 0 1 328,105"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.1"
+                    fill="none"
+                    strokeLinecap="round"
+                    opacity="0.80"
+                  />
+
+                  {/* ── PARTIAL RIM ARC 2: Bottom-Left Circumference ── */}
+                  {/* Diffuse glow layer */}
+                  <path
+                    d="M 114,328 A 169 169 0 0 1 7,216"
+                    stroke="url(#rimGradBL)"
+                    strokeWidth="8"
+                    fill="none"
+                    strokeLinecap="round"
+                    filter="url(#rimGlowFilter)"
+                    opacity="0.65"
+                  />
+                  {/* Crisp neon rim line */}
+                  <path
+                    d="M 114,328 A 169 169 0 0 1 7,216"
+                    stroke="url(#rimGradBL)"
+                    strokeWidth="2.8"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  {/* Razor core highlight */}
+                  <path
+                    d="M 98,322 A 169 169 0 0 1 15,232"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.1"
+                    fill="none"
+                    strokeLinecap="round"
+                    opacity="0.75"
+                  />
+
+                  {/* ── INTERSECTION STARBURST FLARES ── */}
+                  {/* Top-Right Intersection Starburst */}
+                  <g transform="translate(303, 56)">
+                    <circle r="18" fill="url(#starHaloCyan)" />
+                    {/* 4-point diamond star */}
+                    <path
+                      d="M 0,-18 Q 0,0 18,0 Q 0,0 0,18 Q 0,0 -18,0 Q 0,0 0,-18 Z"
+                      fill="#FFFFFF"
+                      opacity="0.95"
+                    />
+                    <circle r="2.8" fill="#D9FF00" />
+                  </g>
+
+                  {/* Bottom-Left Intersection Starburst */}
+                  <g transform="translate(62, 276)">
+                    <circle r="15" fill="url(#starHaloLime)" />
+                    {/* 4-point diamond star */}
+                    <path
+                      d="M 0,-14 Q 0,0 14,0 Q 0,0 0,14 Q 0,0 -14,0 Q 0,0 0,-14 Z"
+                      fill="#FFFFFF"
+                      opacity="0.92"
+                    />
+                    <circle r="2.2" fill="#00E5FF" />
+                  </g>
+
+                  {/* ── PRISMATIC PARTICLES & LIGHT GLINTS ── */}
+                  {/* Top-right glints */}
+                  <g className="neon-particle">
+                    <circle cx="330" cy="22" r="2" fill="#FFFFFF" opacity="0.9" />
+                    <circle cx="330" cy="22" r="6" fill="#00E5FF" opacity="0.35" />
+                  </g>
+                  <g className="neon-particle" style={{ animationDelay: '1.2s' }}>
+                    <path
+                      d="M 358,-12 Q 358,-7 363,-7 Q 358,-7 358,-2 Q 358,-7 353,-7 Q 358,-7 358,-12 Z"
+                      fill="#D9FF00"
+                      opacity="0.85"
+                    />
+                  </g>
+                  <circle cx="380" cy="-42" r="1.6" fill="#00E5FF" opacity="0.75" className="neon-particle" style={{ animationDelay: '2.1s' }} />
+                  <circle cx="410" cy="-72" r="1.2" fill="#D9FF00" opacity="0.8" className="neon-particle" style={{ animationDelay: '0.7s' }} />
+                  <circle cx="348" cy="-55" r="1.0" fill="#FFFFFF" opacity="0.65" />
+
+                  {/* Bottom-left glints */}
+                  <g className="neon-particle" style={{ animationDelay: '1.8s' }}>
+                    <circle cx="32" cy="308" r="1.8" fill="#00E5FF" opacity="0.85" />
+                    <circle cx="32" cy="308" r="5" fill="#00E5FF" opacity="0.30" />
+                  </g>
+                  <circle cx="-12" cy="342" r="1.5" fill="#D9FF00" opacity="0.7" className="neon-particle" style={{ animationDelay: '2.5s' }} />
+                  <path
+                    d="M -42,372 Q -42,376 -38,376 Q -42,376 -42,380 Q -42,376 -46,376 Q -42,376 -42,372 Z"
+                    fill="#FFFFFF"
+                    opacity="0.8"
+                    className="neon-particle"
+                    style={{ animationDelay: '0.4s' }}
+                  />
+
+                  {/* ── TECHNICAL MATRIX DOTTED GUIDES ── */}
+                  {/* Left vertical dotted guide (warm amber with cyan touch) */}
+                  <g opacity="0.35">
+                    <circle cx="-18" cy="100" r="1" fill="#D9A066" />
+                    <circle cx="-18" cy="122" r="1" fill="#D9A066" />
+                    <circle cx="-18" cy="144" r="1" fill="#D9A066" />
+                    <circle cx="-18" cy="166" r="1" fill="#D9A066" />
+                    <circle cx="-18" cy="188" r="1.3" fill="#00E5FF" opacity="0.85" />
+                    <circle cx="-18" cy="210" r="1" fill="#D9A066" />
+                    <circle cx="-18" cy="232" r="1" fill="#D9A066" />
+                  </g>
+                  {/* Right vertical dotted guide (warm amber with lime touch) */}
+                  <g opacity="0.35">
+                    <circle cx="358" cy="80"  r="1.3" fill="#D9FF00" opacity="0.85" />
+                    <circle cx="358" cy="102" r="1" fill="#D9A066" />
+                    <circle cx="358" cy="124" r="1" fill="#D9A066" />
+                    <circle cx="358" cy="146" r="1" fill="#D9A066" />
+                    <circle cx="358" cy="168" r="1" fill="#D9A066" />
+                    <circle cx="358" cy="190" r="1" fill="#D9A066" />
+                  </g>
+                </svg>
               </div>
             </motion.div>
           </motion.div>

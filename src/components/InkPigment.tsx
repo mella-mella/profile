@@ -43,6 +43,8 @@ const C = {
   copper:    '#A66C40',  // accent veins / highlight specks
   amber:     '#D9A066',  // tiny accent specks
   charcoal:  '#2A1E0E',  // deepest shadow layer
+  neonLime:  '#D9FF00',  // subtle specular reflection
+  neonCyan:  '#00E5FF',  // subtle specular reflection
 } as const;
 
 /* ─── SVG filter definitions (kept small per SVG instance) ─────── */
@@ -65,6 +67,14 @@ const Defs = () => (
       <feGaussianBlur stdDeviation="3" result="b" />
       <feMerge>
         <feMergeNode in="b" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    {/* Micro neon specular glint filter */}
+    <filter id="ip-glint" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.2" result="g" />
+      <feMerge>
+        <feMergeNode in="g" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
@@ -151,6 +161,9 @@ const CornerTL = () => (
     <circle cx="82"  cy="20"  r="1.5" fill={C.amber}  fillOpacity="0.22" />
     <circle cx="340" cy="188" r="1.8" fill={C.amber}  fillOpacity="0.28" />
     <circle cx="140" cy="380" r="1.5" fill={C.copper} fillOpacity="0.25" />
+    {/* Faint neon specular glints along moisture edge */}
+    <circle cx="366" cy="20"  r="1.2" fill={C.neonCyan} fillOpacity="0.45" filter="url(#ip-glint)" />
+    <circle cx="285" cy="172" r="1.0" fill={C.neonLime} fillOpacity="0.38" filter="url(#ip-glint)" />
   </svg>
 );
 
@@ -188,6 +201,9 @@ const CornerTR = () => (
       <circle  cx="308" cy="342" r="5"   fill={C.brown} fillOpacity="0.38" />
       <circle  cx="200" cy="24"  r="2"   fill={C.copper} fillOpacity="0.28" />
       <circle  cx="340" cy="188" r="1.8" fill={C.amber}  fillOpacity="0.25" />
+      {/* Rare neon reflections on mirrored edge */}
+      <circle  cx="366" cy="20"  r="1.2" fill={C.neonLime} fillOpacity="0.42" filter="url(#ip-glint)" />
+      <circle  cx="290" cy="330" r="1.1" fill={C.neonCyan} fillOpacity="0.36" filter="url(#ip-glint)" />
     </g>
   </svg>
 );
@@ -319,6 +335,8 @@ const EdgeLeft = () => (
     <circle  cx="100" cy="140" r="1.8" fill={C.copper} fillOpacity="0.28" />
     <circle  cx="82"  cy="384" r="1.6" fill={C.amber}  fillOpacity="0.24" />
     <circle  cx="130" cy="510" r="1.4" fill={C.copper} fillOpacity="0.22" />
+    {/* Micro neon edge glint */}
+    <circle  cx="172" cy="56"  r="1.2" fill={C.neonCyan} fillOpacity="0.42" filter="url(#ip-glint)" />
   </svg>
 );
 
@@ -358,6 +376,9 @@ const WashRadial = () => (
     <circle cx="310" cy="90"  r="2"   fill={C.copper} fillOpacity="0.28" />
     <circle cx="440" cy="380" r="1.8" fill={C.amber}  fillOpacity="0.24" />
     <circle cx="200" cy="140" r="1.6" fill={C.copper} fillOpacity="0.22" />
+    {/* Ambient neon glint */}
+    <circle cx="365" cy="98"  r="1.1" fill={C.neonLime} fillOpacity="0.38" filter="url(#ip-glint)" />
+    <circle cx="472" cy="168" r="1.1" fill={C.neonCyan} fillOpacity="0.36" filter="url(#ip-glint)" />
   </svg>
 );
 
