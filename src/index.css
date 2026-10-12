@@ -6,15 +6,26 @@
 
 @layer base {
   :root {
-    --bg-primary: #07111F;
-    --bg-secondary: #0B1728;
-    --bg-card: #0F1D30;
-    --blue-primary: #2563EB;
-    --blue-secondary: #3B82F6;
-    --blue-light: #60A5FA;
-    --text-primary: #F8FAFC;
-    --text-secondary: #CBD5E1;
-    --text-muted: #94A3B8;
+    /* Backgrounds */
+    --bg-primary:   #11110F;
+    --bg-secondary: #171714;
+    --bg-card:      #1D1C18;
+    --bg-elevated:  #25231E;
+
+    /* Accent – copper / amber */
+    --accent-primary:   #D9A066;
+    --accent-secondary: #E8C79A;
+    --accent-muted:     #A8784A;
+    --accent-glow:      #C68A48;
+
+    /* Text */
+    --text-primary:   #F3EFE7;
+    --text-secondary: #B9B2A7;
+    --text-muted:     #8C867D;
+
+    /* Borders */
+    --border-subtle: rgba(232,199,154,0.13);
+    --border-warm:   rgba(217,160,102,0.45);
   }
 
   * {
@@ -38,29 +49,25 @@
   }
 
   ::selection {
-    background-color: rgba(37, 99, 235, 0.35);
-    color: #F8FAFC;
+    background-color: rgba(217, 160, 102, 0.30);
+    color: #F3EFE7;
   }
 
   :focus-visible {
-    outline: 2px solid var(--blue-secondary);
+    outline: 2px solid var(--accent-primary);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
   ::-webkit-scrollbar-thumb {
-    background: rgba(37, 99, 235, 0.4);
+    background: rgba(217,160,102,0.30);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(59, 130, 246, 0.6);
+    background: rgba(217,160,102,0.55);
   }
 }
 
@@ -73,48 +80,92 @@
     @apply py-24 lg:py-32;
   }
 
+  /* ── Section label (eyebrow) ── */
   .section-label {
-    @apply text-xs font-semibold tracking-[0.18em] uppercase text-blue-light mb-4;
+    @apply text-xs font-semibold tracking-[0.18em] uppercase mb-4;
+    color: var(--accent-primary);
   }
 
   .section-title {
-    @apply text-3xl lg:text-4xl font-bold text-text-primary leading-tight;
+    @apply text-3xl lg:text-4xl font-bold leading-tight;
+    color: var(--text-primary);
   }
 
+  /* ── Cards ── */
   .card-base {
-    @apply bg-bg-card border border-white/[0.06] rounded-xl;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    @apply rounded-xl;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:border-blue-primary/25 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-primary/5;
+    @apply transition-all duration-300;
+  }
+  .card-hover:hover {
+    border-color: rgba(217,160,102,0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(217,160,102,0.10);
   }
 
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-blue-primary text-white font-medium rounded-lg
-           transition-all duration-200 hover:bg-blue-secondary hover:-translate-y-px hover:shadow-lg hover:shadow-blue-primary/25
-           focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-secondary;
+    @apply inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg
+           transition-all duration-200;
+    background: var(--accent-primary);
+    color: #11110F;
+  }
+  .btn-primary:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(217,160,102,0.25);
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--accent-secondary);
+    outline-offset: 2px;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-white/[0.12] text-text-secondary font-medium rounded-lg
-           transition-all duration-200 hover:border-blue-primary/40 hover:text-text-primary hover:bg-white/[0.03] hover:-translate-y-px
-           focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-secondary;
+    @apply inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg
+           transition-all duration-200;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: rgba(217,160,102,0.40);
+    color: var(--text-primary);
+    background: rgba(217,160,102,0.05);
+    transform: translateY(-1px);
+  }
+  .btn-outline:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
   }
 
+  /* ── Gradient heading accent ── */
   .gradient-text {
-    @apply bg-gradient-to-r from-text-primary via-blue-light to-blue-secondary bg-clip-text text-transparent;
+    background: linear-gradient(90deg, var(--text-primary), var(--accent-secondary), var(--accent-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
+  /* ── Tech / category tags ── */
   .tag {
-    @apply text-xs font-medium px-2.5 py-1 rounded-md bg-blue-primary/10 text-blue-light border border-blue-primary/20;
+    @apply text-xs font-medium px-2.5 py-1 rounded-md;
+    background: rgba(217,160,102,0.10);
+    color: var(--accent-secondary);
+    border: 1px solid rgba(217,160,102,0.22);
   }
 
+  /* ── Shimmer skeleton ── */
   .shimmer-bg {
     background: linear-gradient(
       90deg,
-      rgba(15, 29, 48, 0.8) 0%,
-      rgba(27, 51, 87, 0.6) 50%,
-      rgba(15, 29, 48, 0.8) 100%
+      rgba(29,28,24,0.8) 0%,
+      rgba(45,42,34,0.6) 50%,
+      rgba(29,28,24,0.8) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
@@ -127,34 +178,86 @@
   }
 
   .border-subtle {
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-subtle);
   }
 
+  .border-warm {
+    border-color: rgba(217,160,102,0.22);
+  }
+
+  /* Keep old utility aliases so old code compiles */
   .border-blue-subtle {
-    border-color: rgba(37, 99, 235, 0.2);
+    border-color: rgba(217,160,102,0.22);
   }
 }
 
-/* Timeline connector */
+/* ── Timeline connector ── */
 .timeline-line {
-  background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.4), transparent);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(217,160,102,0.35),
+    transparent
+  );
 }
 
-/* Grid background */
+/* ── Subtle background texture grid ── */
 .bg-grid {
-  background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(217,160,102,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,160,102,0.025) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Reduced motion */
+/* ── Ink-splash decorative common styles ── */
+.ink-splash {
+  pointer-events: none;
+  position: absolute;
+  overflow: visible;
+  z-index: 0;
+}
+
+
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Grain texture overlay ──
+   Pinned to viewport so it doesn't scroll with content.
+   Creates the "dark textured paper" feel across the whole page.
+*/
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  background-repeat: repeat;
+}
+
+/* ── Warm section backgrounds with subtle tonal difference ── */
+.section-warm-primary   { background: #11110F; }
+.section-warm-secondary { background: #161512; }
+.section-warm-accent    { background: #131210; }
+
+/* ── Shared ink-pigment layer stacking ──
+   Ensures decorative SVGs always stay behind cards & text.
+   Apply 'ink-layer' class to the pigment wrapper divs.
+*/
+.ink-layer {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  overflow: visible;
+}
+

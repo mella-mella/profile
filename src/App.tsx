@@ -38,7 +38,7 @@ export default function App() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className="min-h-screen bg-bg-primary"
+          className="min-h-screen bg-bg-primary overflow-x-hidden"
         >
           <Navbar />
           <main>

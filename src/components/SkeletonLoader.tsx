@@ -36,10 +36,13 @@ export default function SkeletonLoader() {
   return (
     <div className="min-h-screen bg-bg-primary" aria-label="Loading portfolio" role="status">
       {/* Skeleton Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/[0.04] flex items-center px-6">
+      <div
+        className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6"
+        style={{ borderBottom: '1px solid rgba(232,199,154,0.06)' }}
+      >
         <div className="max-w-6xl w-full mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <SkeletonBlock className="w-8 h-8 rounded-lg" />
+            <SkeletonBlock className="w-8 h-8 rounded-full" />
             <SkeletonBlock className="h-4 hidden sm:block" style={{ width: 112 }} />
           </div>
           <div className="hidden md:flex gap-4">
@@ -100,7 +103,6 @@ export default function SkeletonLoader() {
         </div>
       </div>
 
-      {/* Screen reader text */}
       <span className="sr-only">Loading Mella Melissa's portfolio...</span>
     </div>
   );

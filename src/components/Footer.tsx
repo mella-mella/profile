@@ -6,58 +6,80 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/[0.06] bg-bg-primary">
+    <footer
+      style={{
+        borderTop: '1px solid rgba(232,199,154,0.10)',
+        background: 'var(--bg-primary)',
+      }}
+    >
       <div className="section-container py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          {/* Left: brand */}
+
+          {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <div className="w-6 h-6 rounded-md bg-blue-primary flex items-center justify-center text-white font-bold text-xs">
+              <div
+                className="w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs"
+                style={{
+                  background: 'var(--accent-primary)',
+                  color: '#11110F',
+                }}
+              >
                 M
               </div>
-              <span className="font-semibold text-text-primary text-sm">Mella Melissa</span>
+              <span className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
+                Mella Melissa
+              </span>
             </div>
-            <p className="text-xs text-text-muted">Software Developer · Full-Stack · AI/ML · Systems</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              Software Developer · Full-Stack · AI/ML · Systems
+            </p>
           </div>
 
-          {/* Center: links */}
+          {/* Social links */}
           <div className="flex items-center gap-2">
-            <a
-              href="https://github.com/sahu-sumit"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="p-2 rounded-lg text-text-muted hover:text-text-secondary hover:bg-white/[0.04] transition-colors"
-            >
-              <Github size={16} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/sahu-sumit13/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="p-2 rounded-lg text-text-muted hover:text-text-secondary hover:bg-white/[0.04] transition-colors"
-            >
-              <Linkedin size={16} />
-            </a>
-            <a
-              href="mailto:hr.snowflake.melissa@gmail.com"
-              aria-label="Email"
-              className="p-2 rounded-lg text-text-muted hover:text-text-secondary hover:bg-white/[0.04] transition-colors"
-            >
-              <Mail size={16} />
-            </a>
+            {[
+              { href: 'https://github.com/sahu-sumit', icon: Github, label: 'GitHub' },
+              { href: 'https://www.linkedin.com/in/sahu-sumit13/', icon: Linkedin, label: 'LinkedIn' },
+              { href: 'mailto:hr.snowflake.melissa@gmail.com', icon: Mail, label: 'Email' },
+            ].map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-2 rounded-lg transition-colors duration-200"
+                style={{ color: 'var(--text-muted)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
 
-          {/* Right: back to top + copyright */}
+          {/* Copyright + back to top */}
           <div className="flex items-center gap-4">
-            <p className="text-xs text-text-muted">
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
               © {new Date().getFullYear()} Mella Melissa
             </p>
             <button
               onClick={scrollToTop}
               aria-label="Back to top"
-              className="p-2 rounded-lg border border-white/[0.08] text-text-muted hover:text-text-secondary hover:border-blue-primary/30 transition-all duration-200"
+              className="p-2 rounded-lg transition-all duration-200"
+              style={{
+                border: '1px solid rgba(232,199,154,0.14)',
+                color: 'var(--text-muted)',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(217,160,102,0.40)';
+                (e.currentTarget as HTMLElement).style.color = 'var(--accent-primary)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(232,199,154,0.14)';
+                (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)';
+              }}
             >
               <ArrowUp size={14} />
             </button>
